@@ -1,0 +1,25 @@
+.carousel-item{
+    min-height: 500px;
+    width:100%;
+    background-size: cover;
+ }
+
+ .carousel-content{
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 100px !important;
+    padding-bottom: 100px !important;
+    display: block;
+    color:whitesmoke;
+    font-weight: bold;
+    font-size: 24px;
+ }
+
+ .slider-buttons{
+     margin-top:105px;
+     margin-top: 50px;
+ }
+
+ .slider-btn{
+    margin-left: 20px;
+ }

@@ -1,56 +1,38 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', 'HomepageController@index')->name('home');
+Route::get('/about', 'HomepageController@about')->name('about');
+Route::get('/shop',  'HomepageController@shop')->name('shop');
+Route::get('/blog', 'HomepageController@blog')->name('blog');
+Route::get('/contact', 'HomepageController@contact')->name('contact');
+Route::get('/checkout','HomepageController@checkout')->name('checkout');
+Route::get('/shipping', 'HomepageController@shipping')->name('shipping');
+Route::get('/payment', 'HomepageController@payment')->name('payment');
+Route::get('/product-single', 'HomepageController@product_single')->name('peoduct.single');
+Route::get('/blog-single', 'HomepageController@blog_single')->name('blog.single');
 
-Route::get('/', function () {
-    return view('home.home');
-})->name('home');
+//For Admin dashboard
 
-Route::get('/about', function () {
-    return view('home.about');
-})->name('about');
+Route::group([
+    'namespace' => 'Dashboard',
+    'middleware' => 'auth',
+],
+ function(){
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('dashboard/profile', 'DashboardController@profile')->name('dash.profile');
+    Route::get('dashboard/settings', 'DashboardController@settings')->name('dash.settings');
 
-Route::get('/shop', function () {
-    return view('home.shop');
-})->name('shop');
+    Route::get('dashboard/all-sliders', 'SliderController@index')->name('all.slider');
 
-Route::get('/blog', function () {
-    return view('home.blog');
-})->name('blog');
+    Route::get('dashboard/create-slider', 'SliderController@create')->name('create.slider');
 
-Route::get('/contact', function () {
-    return view('home.contact');
-})->name('contact');
+    Route::post('dashboard/store-slider', 'SliderController@store')->name('store.slider');
 
-Route::get('/checkout', function () {
-    return view('home.checkout');
-})->name('checkout');
+    Route::get('/logout', 'DashboardController@logout')->name('logout');
+});
 
-Route::get('/shipping', function () {
-    return view('home.shipping');
-})->name('shipping');
-
-Route::get('/payment', function () {
-    return view('home.payment');
-})->name('payment');
-
-Route::get('/product-single', function () {
-    return view('home.product-single');
-})->name('peoduct.single');
-
-Route::get('/blog-single', function () {
-    return view('home.blog-single');
-})->name('blog.single');
-
+// LAravel default auth route.. created by laravel
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+

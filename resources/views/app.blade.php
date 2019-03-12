@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="wow-animation desktop landscape rd-navbar-static-linked" lang="en">
    <head>
-      <title>Intense Handmade</title>
+      <title>@yield('title')</title>
       <meta charset="utf-8">
       <meta name="format-detection" content="telephone=no">
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -41,6 +41,8 @@
       }
       </style>
    
+    @stack('css')
+
    </head>
    <body class="">
       <!-- Page-->
@@ -89,49 +91,18 @@
                               </button>
                            </div>
                         </div>
-                        <div class="rd-navbar-menu-wrap">
-                           <div class="container">
-                              <div class="rd-navbar-nav-wrap toggle-original-elements">
-                                 <div class="rd-navbar-mobile-scroll">
-                                    <!--Navbar Brand Mobile-->
-                                    <div class="rd-navbar-mobile-brand">
-                                      <a href="index.html"><img src="images/logo.png" alt="" width="221" height="32"></a></div>
-                                    <!-- RD Navbar Nav-->
-                                    <ul class="rd-navbar-nav">
-                                       <li class="active">
-                                         <a href="/"><span>প্রথম পাতা</span></a>
-                                       </li>
-                                       <li class="">
-                                          <a href="shop"><span>ক্যাটাগরী</span></a>
-                                       </li>
-                                       <li class="">
-                                          <a href="blog"><span>ব্লগ সমূহ</span></a>
-                                       </li>
-                                       <li>
-                                          <a href="about"><span>আমাদের সম্পর্কে</span></a>
-                                       </li>
-                                       <li>
-                                          <a href="contact"><span>যোগাযোগ করুন</span></a>
-                                       </li>
-                                       <li class="cart rd-navbar--has-dropdown rd-navbar-submenu">
-                                          <a href="checkout">
-                                             <span class="fa fa-shopping-cart"></span>
-                                             <span class="cart-text">ঝুড়ি</span>
-                                             <span class="cart-count big text-middle text-regular">2</span>
-                                          </a>
-                                          <span class="rd-navbar-submenu-toggle"></span>
-                                       </li>
-                                    </ul>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+                    
+
+                        @include('home/inc/navbar') 
+
+
                      </div>
                   </nav>
                </div>
          </header>
 
-         @yield('content')
+
+         @yield('content') 
 
 
          <!-- Page Footers-->
@@ -189,6 +160,8 @@
       <script type="text/javascript" id="">(function(){var b=document.location.search.split("aff\x3d")[1];if(b){var d=document.querySelectorAll("a"),c;for(c=0;c<d.length;c++){var a=d[c];0==a.href.indexOf("https://www.templatemonster.com")&&(0<a.href.indexOf("?")?a.href=a.href+"\x26aff\x3d"+b:a.href=a.href+"?aff\x3d"+b)}}b=document.location.search.split("i\x3d")[1];var e=document.location.search.split("pr_code\x3d")[1];if(b&&e)for(b=b.split("\x26")[0],d=document.querySelectorAll("a"),c=0;c<d.length;c++)a=d[c],0==a.href.indexOf("https://www.templatemonster.com")&&
          (a.href="https://www.templatehelp.com/preset/cart.php?act\x3dadd\x26templ\x3d"+b+"\x26pr_code\x3d"+e)})();
       </script>
+
+      @stack('js')
    </body>
    <!-- Google Tag Manager -->
 </html>

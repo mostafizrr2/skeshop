@@ -420,9 +420,8 @@
  </div>
 </section>
 
-
-
 @endsection
+
 
 @push('js')
     

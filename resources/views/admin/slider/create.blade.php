@@ -9,6 +9,9 @@
 
 @include('admin/inc/errors')
 
+@if (Session::get('success'))
+    {{ Session::get('success') }}
+@endif
 
     <div class="row">
         <div class="col-md-10">
@@ -36,7 +39,7 @@
                         </div>
                     </div>
     
-                    <div class="col-md-8 pl-1">
+                    <div class="col-md-6 pl-1">
                         <div class="form-group">
                             <input type="text" class="form-control" name="slider_title" placeholder="Sitle">
                         </div>
@@ -50,13 +53,13 @@
                         </div>
                     </div>
     
-                    <div class="col-md-8 pl-1">
+                    <div class="col-md-6 pl-1">
                         <div class="form-group">
                                 <input type="text" class="form-control" name="slider_subtitle" placeholder="Subtitle">
                         </div>
                     </div>
                 </div>
-
+<br><br>
 
                 <div class="row">
                     <div class="col-md-4 pr-1">
@@ -69,7 +72,7 @@
                         <input type="file" class="form-control-file" name="slider_image">           
                     </div>
                 </div>
-
+<br><br>
     
                 <div class="row">
                     <div class="col-md-4 pr-1">
@@ -80,17 +83,16 @@
     
                     <div class="col-md-8 pl-1">
 
-                        <input id="button-one" type="checkbox" class="" name="button_one"> 
+                        <div class="form-group">
+                            <input id="button-one" type="checkbox" class="" name="button_one" value="">
+                            <label for="button-one">Select to active button one</label> 
+                        </div>
 
                         <div id="button-one-content" style="display:none;">
                             <div class="row">
-
-                                <div class="col-md-2 pr-1">
-                                </div>     
-
                                 <div class="col-md-4 pr-1">
                                     <div class="form-group">
-                                    <label>Button Color</label>
+                                    <label>Button background colour</label>
                                     </div>
                                 </div>
                 
@@ -99,33 +101,42 @@
                                 </div>
                             </div>
 
+
                             <div class="row">
-                                    <div class="col-md-2 pr-1">
-                                   </div>     
-                                    <div class="col-md-4 pr-1">
-                                        <div class="form-group">
-                                        <label>Button Link</label>
-                                        </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                    <label>Button text color</label>
                                     </div>
-                    
-                                    <div class="col-md-6 pl-1">
-                                        <input type="text" class="form-control" id="btn-input"  name="button_one_link" placeholder="type your button link here">           
+                                </div>
+                
+                                <div class="col-md-6">
+                                    <input type="color" onchange="oneTextColorValue()" value="" name="button_one_text_color" id="oneTextcolor">                                   
+                                </div>
+                            </div>                            
+
+                            <div class="row">    
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                    <label>Button Link</label>
                                     </div>
+                                </div>
+                
+                                <div class="col-md-6 pl-1">
+                                    <input type="text" class="form-control" id="btn-input"  name="button_one_link" placeholder="button link">           
+                                </div>
                             </div>  
                             
                             
-                            <div class="row">
-                                    <div class="col-md-2 pr-1">
-                                   </div>     
-                                    <div class="col-md-4 pr-1">
-                                        <div class="form-group">
-                                        <label>Button Text</label>
-                                        </div>
+                            <div class="row">    
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                    <label>Button Text</label>
                                     </div>
-                    
-                                    <div class="col-md-6 pl-1">
-                                        <input type="text" class="form-control" id="btn-input"  name="button_one_text" placeholder="type your button text here">           
-                                    </div>
+                                </div>
+                
+                                <div class="col-md-6 pl-1">
+                                    <input type="text" class="form-control" id="btn-input"  name="button_one_text" placeholder="button text">           
+                                </div>
                             </div>
 
                         </div>         
@@ -137,23 +148,22 @@
                 <div class="row">
                     <div class="col-md-4 pr-1">
                         <div class="form-group">
-                        <label>Button Two</label>
+                        <label for="button-two">Button Two</label>
                         </div>
                     </div>
     
                     <div class="col-md-8 pl-1">
-
-                        <input id="button-two" type="checkbox" class="" name="button_two"> 
-
+                        <div class="form-group">
+                           <input id="button-two" type="checkbox" class="" name="button_two" value="">
+                           <label for="button-two">Select to active button two</label> 
+                        </div>
                         <div id="button-two-content" style="display:none;">
                             <div class="row">
-
-                                <div class="col-md-2 pr-1">
-                                </div>     
+                
 
                                 <div class="col-md-4 pr-1">
                                     <div class="form-group">
-                                    <label>Button Color</label>
+                                    <label>Button background Colour</label>
                                     </div>
                                 </div>
                 
@@ -163,37 +173,67 @@
                             </div>
 
                             <div class="row">
-                                    <div class="col-md-2 pr-1">
-                                   </div>     
-                                    <div class="col-md-4 pr-1">
-                                        <div class="form-group">
-                                        <label>Button Link</label>
-                                        </div>
+                
+
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                    <label>Button text Colour</label>
                                     </div>
-                    
-                                    <div class="col-md-6 pl-1">
-                                        <input type="text" class="form-control" id="btn-input"  name="button_two_link" placeholder="type your button link here">           
+                                </div>
+                
+                                <div class="col-md-6">
+                                    <input type="color" onchange="twoTextColorValue()"  name="button_two_text_color" value="" id="TextTwocolor">                                   
+                                </div>
+
+                            </div>
+
+                            <div class="row">    
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                    <label>Button Link</label>
                                     </div>
+                                </div>
+                
+                                <div class="col-md-6 pl-1">
+                                    <input type="text" class="form-control" id="btn-input"  name="button_two_link" placeholder="button link">           
+                                </div>
                             </div> 
                             
                             
-                            <div class="row">
-                                    <div class="col-md-2 pr-1">
-                                   </div>     
-                                    <div class="col-md-4 pr-1">
-                                        <div class="form-group">
-                                        <label>Button Text</label>
-                                        </div>
+                            <div class="row">    
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                    <label>Button Text</label>
                                     </div>
-                    
-                                    <div class="col-md-6 pl-1">
-                                        <input type="text" class="form-control" id="btn-input"  name="button_two_text" placeholder="Type button name here">           
-                                    </div>
+                                </div>
+                
+                                <div class="col-md-6 pl-1">
+                                    <input type="text" class="form-control" id="btn-input"  name="button_two_text" placeholder="button text">           
+                                </div>
                             </div>
 
                         </div>         
                     </div>
              
+                </div>
+
+<br><br>
+
+                <div class="row">
+                    <div class="col-md-4 pr-1">
+                        <div class="form-group">
+                        <label>Publish Slider</label>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-3 pl-1">
+                        <div class="form-group">
+                            <select type="file" class="form-control" name="is_bublished">
+                                <option value="1">Publish</option> 
+                                <option value="0">Unpublish</option> 
+                            </select>   
+                        </div>
+                    </div>
                 </div>
 
           
@@ -214,22 +254,38 @@
 <script>
 
     var oneInput = document.getElementById("onecolor");
-    oneInput.setAttribute('value', '');
     function oneChangeValue()
     {
         var theColor = oneInput.value;
-        oneInput.setAttribute('value',theColor);
+        oneInput.setAttribute('value', theColor);
         console.log(theColor);
     }
 
 
-    var twoInput = document.getElementById("twocolor");
-    twoInput.setAttribute('value', '');
+    var oneTextColor = document.getElementById("oneTextcolor");
+    function oneTextColorValue()
+    {
+        var theColor = oneTextColor.value;
+        oneTextColor.setAttribute('value', theColor);
+        console.log(theColor);
+    }
+
+
+    var twoInput = document.getElementById("twocolor")
     function twoChangeValue()
     {
         var theColor = twoInput.value;
         twoInput.setAttribute('value',theColor);
         console.log(theColor);
+    }
+
+
+    var twoTextColor = document.getElementById("TextTwocolor")
+    function twoTextColorValue()
+    {
+        var theColor = twoTextColor.value;
+        twoTextColor.setAttribute('value',theColor);
+        console.log(theColor);        
     }
    
 
@@ -237,13 +293,13 @@
 
         $('#button-one').click(function(){
 
+            $('#button-one').attr('value', 1);
+
             if( $('#button-one').is(":checked") ){
-                $('#button-one').attr('value', true);
                 $('#button-one-content').show();
 
             }
             else{
-                $('#button-one').attr('value', false);
                 $('#button-one-content').hide();
             }
         });     
@@ -252,15 +308,18 @@
 
         $('#button-two').click(function(){
 
-            if( $('#button-two').is(":checked") ){
-                $('#button-two').attr('value', true);
+            $('#button-two').attr('value', 1);
+
+            if( $('#button-two').is(":checked") )
+            {
                 $('#button-two-content').show();
             }
             else{
-                $('#button-two').attr('value', false);
                 $('#button-two-content').hide();
             }
-        });           
+        });
+
+
     });
 
 </script>

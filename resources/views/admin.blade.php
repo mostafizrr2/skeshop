@@ -3,12 +3,13 @@
 
 <head>
   <meta charset="utf-8" />
+
   <link rel="apple-touch-icon" sizes="76x76" href="/admin/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/admin/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Paper Dashboard 2 by Creative Tim
-  </title>
+
+  {{-- <title>@yield('title')</title> --}}
+
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -27,15 +28,14 @@
 
     @include('admin/inc/sidebar')
 
-
     <div class="main-panel">
-   
-      
+
      @include('admin/inc/navbar')
 
-     
      @yield('content')
 
+
+     {{-- @yield('another_content') --}}
 
      @include('admin/inc/footer')
 
@@ -56,13 +56,12 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/admin/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="/admin/demo/demo.js"></script>
-  <script>
+  {{-- <script src="/admin/demo/demo.js"></script> --}}
+  {{-- <script>
     $(document).ready(function() {
-      // Javascript method's body can be found in admin/admin-for-demo/js/demo.js
       demo.initChartsPages();
     });
-  </script>
+  </script> --}}
 
   @stack('js')
 </body>

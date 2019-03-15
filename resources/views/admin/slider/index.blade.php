@@ -40,18 +40,27 @@
                     </tr>
                 </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Dakota Rice</td>
-                            <td>স্টেশনারীজ আইটেম</td>
-                            <td>অনেকেই অনেক সময় জানতে চেয়েছেন ঢাকার কোথায় কোন আইটেম পাইকারি দরে পাওয়া যায়।</td>
-                            <td><span class="badge badge-default">Published</span></td>
-                            <td>
-                                <a href="" class="btn btn-info btn-sm">edit</a>
-                                <a href="" class="btn btn-danger btn-sm ">delete</a>
-                            </td>
-                        </tr>
-        
+
+                        @foreach ($sliders as $key => $slider )     
+
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>
+                                    <img src="{{ url('/storage/slider_images/'.$slider->slider_image) }}" alt="" width="100px" height="100px">
+                                </td>
+                                <td>{{ $slider->slider_title }}</td>
+                                <td>{{ $slider->slider_subtitle }}</td>
+                                
+                                <td>
+                                    <span class="badge badge-default">Published</span>
+                                </td>
+
+                                <td>
+                                    <a href="{{ route('edit.slider',$slider->id) }}" class="btn btn-info btn-sm">edit</a>
+                                    <a href="" class="btn btn-danger btn-sm ">delete</a>
+                                </td>
+                            </tr>
+                        @endforeach       
                     </tbody>
                 </table>
 

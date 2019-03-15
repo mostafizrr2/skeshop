@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -34,6 +36,20 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+
+        $user = User::where('email', 'admin@gmail.com')->first();
+
+        // dd($user);
+
+        if (!$user) {
+              $user = new User();
+              $user->create([
+                  'name' => 'User Admin',
+                  'email' => 'admin@gmail.com',
+                  'password' => Hash::make('password')
+              ]);
+        }
+
         $this->middleware('guest')->except('logout');
     }
 }

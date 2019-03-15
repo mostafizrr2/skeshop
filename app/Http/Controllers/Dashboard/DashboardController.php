@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\User;
+use App\Slider;
 use App\Setting;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -39,9 +40,16 @@ class DashboardController extends Controller
 
     public function settings()
     {
+        
+        if(! Setting::where('id', 1)->first() )
+        {  
+            $setting = new Setting();
+            $setting->create();  
+        }
+        
         $data['setting'] = Setting::where('id',1)->first();
-
         // dd($data['setting']);
+
         return view('admin.settings', $data);
     } 
 

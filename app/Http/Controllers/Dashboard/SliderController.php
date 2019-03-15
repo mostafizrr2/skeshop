@@ -6,6 +6,7 @@ use App\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class SliderController extends Controller
 {
@@ -16,7 +17,9 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return view('admin.slider.index');
+        $data['sliders'] = Slider::latest()->get();
+        $data['title'] = "All sliders from database";
+        return view('admin.slider.index', $data);
     }
 
     /**
@@ -40,7 +43,7 @@ class SliderController extends Controller
         // $image = $request->slider_image;
         // $file_ext =  $image->getClientOriginalExtension();
         // $file_name =  time().'.'.$file_ext;
-        // dd($file_name);
+        // dd($request->all());
 
         $request->validate([
             'slider_title' => 'max:95',
@@ -54,8 +57,11 @@ class SliderController extends Controller
 
         $image = $request->slider_image;
         $file_ext =  $image->getClientOriginalExtension();
-        $file_name =  time().'.'.$file_ext;
+        $file_name =  'slider_'.time().'.'.$file_ext;
+
+        $path = 'public/slider_images/';
         
+        Storage::putFileAs($path, $image, $file_name);
 
         $data = new Slider();
         $data->slider_title =  $request->slider_title;
@@ -65,11 +71,13 @@ class SliderController extends Controller
 
         $data->button_one =  $request->button_one;
         $data->button_one_color =  $request->button_one_color;
+        $data->button_one_text_color =  $request->button_one_text_color;
         $data->button_one_link =  $request->button_one_link;
         $data->button_one_text =  $request->button_one_text;
 
         $data->button_two =  $request->button_two;
         $data->button_two_color =  $request->button_two_color;
+        $data->button_two_text_color =  $request->button_two_text_color;
         $data->button_two_link =  $request->button_two_link;
         $data->button_two_text =  $request->button_two_text;
 
@@ -101,7 +109,9 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['slider'] = Slider::whereId($id)->first();
+        
+        return view('admin.slider.edit', $data);
     }
 
     /**

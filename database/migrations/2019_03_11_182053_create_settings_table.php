@@ -14,18 +14,18 @@ class CreateSettingsTable extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('co_name',50)->default('SK Enterprise');
-            $table->string('co_title',50)->nullable()->default('Stationaries production and whole seller ');
-            $table->string('co_slogan',120)->nullable()->default('A company for the new items');
-            $table->string('co_email',30)->nullable()->default('info@sk-enterprise.com');
-            $table->string('co_phone',20)->nullable()->default('+880 1880-937822');
-            $table->string('co_address',100)->nullable()->default('Shital Jharna R/A, Oxygen, Chattogram');
-            $table->string('co_city',20)->nullable()->default('Chattogram');
-            $table->string('co_country',20)->nullable()->default('Bangladesh');
-            $table->string('co_postal',10)->nullable()->default('4210');
-            $table->string('co_keywords',150)->nullable()->default('pen, pencil, stationaries, burmese foods', 'whole seller');
-            $table->text('co_description')->nullable();
+            $table->tinyInteger('id')->nullable()->default(1);
+            $table->string('co_name',50)->nullable()->default('My Company Name');
+            $table->string('co_title',100)->nullable()->default('My Company title');
+            $table->string('co_slogan',120)->nullable()->default('A Good slogan of the Company');
+            $table->string('co_email',30)->nullable()->default('company-email@comapany.com');
+            $table->string('co_phone',20)->nullable()->default('+880 1234567890');
+            $table->string('co_address',100)->nullable()->default('Company location address');
+            $table->string('co_city',20)->nullable()->default('Company City');
+            $table->string('co_country',20)->nullable()->default('Company Country');
+            $table->string('co_postal',10)->nullable()->default('Zip Code');
+            $table->string('co_keywords',150)->nullable()->default('keyprds', 'tags', 'company', 'google', 'whole seller');
+            $table->text('co_description')->nullable('A brief description for the company');
             $table->timestamps();
         });
     }

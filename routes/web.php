@@ -27,6 +27,11 @@ Route::group([
     Route::get('dashboard/create-slider', 'SliderController@create')->name('create.slider');
 
     Route::post('dashboard/store-slider', 'SliderController@store')->name('store.slider');
+    
+    
+    Route::get('dashboard/edit-slider/{id}', 'SliderController@edit')->name('edit.slider');
+
+
 
     Route::get('/logout', 'DashboardController@logout')->name('logout');
 });

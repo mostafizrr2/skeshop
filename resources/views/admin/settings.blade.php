@@ -36,6 +36,20 @@
     
                     <div class="col-md-8 pl-1">
                         <div class="form-group">
+                            <input type="text" class="form-control" name="co_name" placeholder="Name" value="{{ $setting->co_name }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 pr-1">
+                        <div class="form-group">
+                        <label>Company title</label>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-8 pl-1">
+                        <div class="form-group">
                             <input type="text" class="form-control" name="co_title" placeholder="title" value="{{ $setting->co_title }}">
                         </div>
                     </div>

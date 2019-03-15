@@ -17,17 +17,21 @@ class CreateSlidesTable extends Migration
             $table->bigIncrements('id');
             $table->string('slider_title', 100)->nullable();
             $table->string('slider_subtitle',200)->nullable();
-            $table->string('slider_image', 50);
+            $table->string('slider_image', 50)->nullable();
 
             $table->tinyInteger('button_one')->nullable()->default(0);
             $table->string('button_one_color',30)->nullable();
+            $table->string('button_one_text_color',30)->nullable();
             $table->string('button_one_link',50)->nullable();
             $table->string('button_one_text',50)->nullable();
 
             $table->tinyInteger('button_two')->nullable()->default(0);
             $table->string('button_two_color',30)->nullable();
+            $table->string('button_two_text_color',30)->nullable();
             $table->string('button_two_link',50)->nullable();
             $table->string('button_two_text',50)->nullable();
+
+            $table->tinyInteger('is_published')->nullable();
 
             $table->timestamps();
         });

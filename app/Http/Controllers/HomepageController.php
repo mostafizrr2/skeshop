@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Slider;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
 {
     public function index()
     {
-        return view('home.home');
+        $data['sliders'] = Slider::where('is_published', 1)
+                                    ->latest()
+                                    ->get();
+
+        return view('home.home', $data);
     }
 
     public function about() 

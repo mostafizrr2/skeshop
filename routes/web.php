@@ -17,7 +17,9 @@ Route::group([
     'namespace' => 'Dashboard',
     'middleware' => 'auth',
 ],
+
  function(){
+
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('dashboard/profile', 'DashboardController@profile')->name('dash.profile');
     Route::get('dashboard/settings', 'DashboardController@settings')->name('dash.settings');
@@ -25,11 +27,12 @@ Route::group([
     Route::get('dashboard/all-sliders', 'SliderController@index')->name('all.slider');
 
     Route::get('dashboard/create-slider', 'SliderController@create')->name('create.slider');
-
     Route::post('dashboard/store-slider', 'SliderController@store')->name('store.slider');
     
-    
     Route::get('dashboard/edit-slider/{id}', 'SliderController@edit')->name('edit.slider');
+    Route::put('dashboard/update-slider/{id}', 'SliderController@update')->name('update.slider');
+
+    Route::get('dashboard/delete-slider/{id}', 'SliderController@destroy')->name('destroy.slider');
 
 
 

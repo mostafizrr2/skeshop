@@ -15,8 +15,6 @@
 
 
 @section('content')
-    
-<div class="content">
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -28,46 +26,61 @@
             </div>
             <hr>
             <div class="card-body">
-                <table class="table table-striped">
+                @if (count($sliders) > 0)
+                <table class="table">
                     <thead>
                         <tr>
-                            <th>Sr</th>
-                            <th>Image</th>
-                            <th>Title</th>
-                            <th>Subtile</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                    </tr>
-                </thead>
+                            <th width="15%"  class="text-center">Image</th>
+                            <th width="40%">Title</th>
+                            <th width="10%"  class="text-center">Status</th>
+                            <th width="35%"  class="text-center">Action</th>
+                        </tr>
+                    </thead>
                     <tbody>
 
                         @foreach ($sliders as $key => $slider )     
 
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>
-                                    <img src="{{ url('/storage/slider_images/'.$slider->slider_image) }}" alt="" width="100px" height="100px">
+                                <td class="text-center">
+                                    <img class="img-fluid img-thumbnail"
+                                     src="{{ url('/storage/slider_images/'.$slider->slider_image) }}" 
+                                     alt="" style="height:50px !important; !important;">
                                 </td>
-                                <td>{{ $slider->slider_title }}</td>
-                                <td>{{ $slider->slider_subtitle }}</td>
-                                
                                 <td>
-                                    <span class="badge badge-default">Published</span>
+                                   <h6>{{ $slider->slider_title }}</h6> 
                                 </td>
 
-                                <td>
-                                    <a href="{{ route('edit.slider',$slider->id) }}" class="btn btn-info btn-sm">edit</a>
-                                    <a href="" class="btn btn-danger btn-sm ">delete</a>
+                                <td class="text-center">
+                                    <span class="badge badge-{{ ($slider->is_published == 1) ? 'info' : 'danger' }} ">
+                                        @if ($slider->is_published == 1)
+                                            Published 
+                                        @else
+                                            Unpublished
+                                        @endif
+                                    </span>
+                                </td>
+
+                                <td class="text-center">
+                                    <a href="{{ route('edit.slider',$slider->id) }}" 
+                                        class="btn btn-info btn-sm" style="margin:5px;">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="{{ route('destroy.slider', $slider->id) }}" onclick="return confirm('Are you sure to delete this slider?')"
+                                        class="btn btn-danger btn-sm"  style="margin:5px;">
+                                        <i class="fa fa-times"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach       
                     </tbody>
                 </table>
+                
+                @else
+                  <h3>No slider available <a href="{{ route('create.slider') }}">Crate new one</a></h3> 
+                @endif
 
             </div>
         </div>
     </div>
 </div>
-</div>
-
 @endsection

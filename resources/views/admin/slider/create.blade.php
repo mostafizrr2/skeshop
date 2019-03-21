@@ -3,29 +3,18 @@
 @section('title', 'SK Settings')
 
 @section('content')
-    
-<div class="content">
 
-
-@include('admin/inc/errors')
-
-@if (Session::get('success'))
-    {{ Session::get('success') }}
-@endif
-
-    <div class="row">
-        <div class="col-md-10">
-            <a href="{{ route('all.slider') }}" class="btn btn-info">Sliders</a>       
-        </div>    
-    </div>
-
-
-    <div class="row">
+<div class="row">
+    <div class="col-md-10">
+        <a href="{{ route('all.slider') }}" class="btn btn-info">Sliders</a>       
+    </div>    
+</div>
+<div class="row">
 
      <div class="col-md-10">
         <div class="card card-user">
             <div class="card-header">
-            <h5 class="card-title">Change Settings</h5>
+            <h5 class="card-title">Add new slider</h5>
             </div>
 
             <hr>
@@ -228,7 +217,7 @@
     
                     <div class="col-md-3 pl-1">
                         <div class="form-group">
-                            <select type="file" class="form-control" name="is_bublished">
+                            <select class="form-control" name="is_published">
                                 <option value="1">Publish</option> 
                                 <option value="0">Unpublish</option> 
                             </select>   
@@ -243,11 +232,7 @@
             </div>
         </div>
     </div>
-    </div>
 </div>
-
-
-
 @endsection
 
 @push('js')

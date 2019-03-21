@@ -9,46 +9,48 @@
    
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+   <ol class="carousel-indicators">
+      @foreach ($sliders as $key => $slider)   
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" 
+      class=" {{ ($key+1 == 1 ) ? 'active' : '' }}"></li>
+      @endforeach
     </ol>
 
-    <div class="carousel-inner">
 
-      <div class="carousel-item active" style="background-image: url(images/home-04-1920x1230.jpg)">
-          <div class="carousel-content">
-             <h1>স্টেশনারীজ আইটেম</h1>
-             <p>অনেকেই অনেক সময় জানতে চেয়েছেন ঢাকার কোথায় কোন আইটেম পাইকারি দরে পাওয়া যায়। </p>
-             <div class="slider-buttons">
-                <a href="#" class="btn btn-success slider-btn">বিস্তারিত জানুন</a>
-                <a href="#" class="btn btn-danger slider-btn">পন্য কিনুন</a>
-             </div> 
-          </div>
-      </div>
+   <div class="carousel-inner">
 
-      <div class="carousel-item" style="background-image: url(images/slider1.jpg)">
+   @foreach ($sliders as $key => $slider)         
+      <div class="carousel-item {{ ($key+1 == 1) ? 'active' : '' }}" 
+      style="background-image: url({{ url('storage/slider_images/'. $slider->slider_image) }});
+      background-size: cover cover; ">
           <div class="carousel-content">
-                <h1>বারমীজ আচার</h1>
-                <p>অনেকেই অনেক সময় জানতে চেয়েছেন ঢাকার কোথায় কোন আইটেম পাইকারি দরে পাওয়া যায়।</p>
+                <h1>{{ $slider->slider_title }}</h1>
+                <p>{{ $slider->slider_subtitle }}</p>
                 <div class="slider-buttons">
-                   <a href="#" class="btn btn-success slider-btn">Learn more</a>
-                   <a href="#" class="btn btn-danger slider-btn">Watch video</a>
+
+                  @if ($slider->button_one == 1)
+                     <a href="{{ $slider->button_one_link }}" 
+                        class="btn slider-btn"
+                        style="background-color: {{ $slider->button_one_color }}; 
+                        color:{{ $slider->button_one_text_color }}" >
+
+                        {{ $slider->button_one_text }}
+                     </a>           
+                  @endif
+
+                  @if ($slider->button_two == 1)
+                     <a href=" {{ $slider->button_two_link }}" 
+                        class="btn slider-btn" 
+                        style="background-color: {{ $slider->button_two_color }}; 
+                        color:{{ $slider->button_two_text_color }}">
+                        {{ $slider->button_two_text }}
+                     </a>          
+                  @endif
+
                 </div> 
           </div>
       </div>
-
-      <div class="carousel-item" style="background-image: url(images/slider2.jpg)">
-          <div class="carousel-content">
-                <h1>স্টেশনারীজ আইটেম</h1>
-                <p>Otherwise, the carousel will not be visible.Otherwise, the carousel will not be visible.</p>
-                <div class="slider-buttons">
-                   <a href="#" class="btn btn-success slider-btn">Learn more</a>
-                   <a href="#" class="btn btn-danger slider-btn">Watch video</a>
-                </div> 
-          </div>
-      </div>
+    @endforeach
       
     </div>
 

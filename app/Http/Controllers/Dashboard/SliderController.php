@@ -40,6 +40,8 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd( $request->is_published);
         // $image = $request->slider_image;
         // $file_ext =  $image->getClientOriginalExtension();
         // $file_name =  time().'.'.$file_ext;
@@ -80,13 +82,13 @@ class SliderController extends Controller
         $data->button_two_text_color =  $request->button_two_text_color;
         $data->button_two_link =  $request->button_two_link;
         $data->button_two_text =  $request->button_two_text;
-
+        $data->is_published =  $request->is_published;
 
         $data->save();
 
         Session::flash('success', 'Slider Saved Successfully');
         
-        return back();
+        return redirect()->route('all.slider');
 
     }
 
@@ -123,7 +125,71 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'slider_title' => 'max:95',
+            'slider_subtitle'=> 'max:195',
+            // 'slider_image'=>'required',
+            'button_one_link'=> 'max:50',
+            'button_one_text'=>'max:50',
+            'button_two_link'=> 'max:50',
+            'button_two_text'=>'max:50',
+        ]);
+
+        $slider_data = Slider::whereId($id)->first();
+
+        $old_image = $slider_data->slider_image;
+
+
+        if( $request->hasFile('slider_image') )
+        { 
+            $image = $request->slider_image;
+            $file_ext =  $image->getClientOriginalExtension();
+
+            $file_name =  'slider_'.time().'.'.$file_ext;
+
+            $path = 'public/slider_images/';
+
+            if( Storage::exists( $path . $old_image ) )
+            {
+                Storage::delete( $path . $old_image);  
+            }
+            
+            Storage::putFileAs( $path, $image, $file_name );
+
+        }
+        else
+        {
+            $file_name =  $old_image;
+        }
+
+        // dd( $file_name);
+
+        $data = Slider::find($id);
+
+        $data->slider_title =  $request->slider_title;
+        $data->slider_subtitle =  $request->slider_subtitle;
+
+        $data->slider_image =  $file_name;
+
+        $data->button_one =  $request->button_one;
+        $data->button_one_color =  $request->button_one_color;
+        $data->button_one_text_color =  $request->button_one_text_color;
+        $data->button_one_link =  $request->button_one_link;
+        $data->button_one_text =  $request->button_one_text;
+
+        $data->button_two =  $request->button_two;
+        $data->button_two_color =  $request->button_two_color;
+        $data->button_two_text_color =  $request->button_two_text_color;
+        $data->button_two_link =  $request->button_two_link;
+        $data->button_two_text =  $request->button_two_text;
+        $data->is_published =  $request->is_published;
+
+        $data->save();
+
+        Session::flash('success', 'Slider Updated Successfully');
+        
+        return back();            
+
     }
 
     /**
@@ -134,6 +200,16 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $slider = Slider::whereId($id)->first();
+        $image = $slider->slider_image;
+        $path = 'public/slider_images/'; 
+        Storage::delete( $path . $image);  
+    
+        $data = Slider::findOrFail($id);
+        $data->delete();
+
+        Session::flash('success', 'Slider deleted successfully..');
+        return redirect()->route('all.slider');
     }
 }
